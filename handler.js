@@ -6,9 +6,9 @@
 • Github: https://github.com/LEXIC-TEAM
 =================================*/
 
-const simple = require('./function/simple')
+const simple = require('./lib/simple')
 const util = require('util')
-const { color } = require('./function/color')
+const { color } = require('./lib/color')
 const moment = require("moment-timezone")
 const fs = require('fs')
 const fetch = require("node-fetch")
@@ -969,7 +969,7 @@ ${text}
             }
 
             try {
-               require('./function/print')(m, this)
+               require('./lib/print')(m, this)
             } catch (e) {
                 console.log(m, m.quoted, e)
            }

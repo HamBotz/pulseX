@@ -32,13 +32,13 @@ const moment = require("moment-timezone")
 const time = moment.tz('Asia/Jakarta').format("HH:mm:ss")
 const chalk = require('chalk')
 const readline = require('readline')
-const { color } = require('./function/color')
-let simple = require('./function/simple')
+const { color } = require('./lib/color')
+let simple = require('./lib/simple')
 var low
 try {
   low = require('lowdb')
 } catch (e) {
-  low = require('./function/lowdb')
+  low = require('./lib/lowdb')
 }
 const { Low, JSONFile } = low
 
@@ -87,7 +87,7 @@ loadDatabase = async function loadDatabase() {
 }
 loadDatabase()
 
-const authFile = `KaguyaSs`
+const authFile = `ham`
 global.isInit = !fs.existsSync(authFile)
 const { state, saveState, saveCreds } = await useMultiFileAuthState(authFile)
 const { version, isLatest } = await fetchLatestBaileysVersion()
@@ -159,7 +159,7 @@ async function connectionUpdate(update) {
 	if (global.db.data == null) await loadDatabase()
 	// console.log(JSON.stringify(update, null, 4))
 }
-	 if((usePairingCode || useMobile) && fs.existsSync('./Dann/creds.json') && !conn.authState.creds.registered) {
+	 if((usePairingCode || useMobile) && fs.existsSync('./ham/creds.json') && !conn.authState.creds.registered) {
 		console.log(chalk.yellow('-- WARNING: creds.json is broken, please delete it first --'))
 		process.exit(0)
 	}
