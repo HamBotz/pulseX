@@ -6,9 +6,9 @@
 • Github: https://github.com/LEXIC-TEAM
 =================================*/
 
-const simple = require('./lib/simple')
+const simple = require('./function/simple')
 const util = require('util')
-const { color } = require('./lib/color')
+const { color } = require('./function/color')
 const moment = require("moment-timezone")
 const fs = require('fs')
 const fetch = require("node-fetch")
@@ -705,8 +705,8 @@ module.exports = {
                 }, time)
             }
 
-            // for (let name in global.plugins) {
-            //     let plugin = global.plugins[name]
+            // for (let name in global.features) {
+            //     let plugin = global.features[name]
             //     if (!plugin) continue
             //     if (plugin.disabled) continue
             //     if (!plugin.all) continue
@@ -733,8 +733,8 @@ module.exports = {
             const isRAdmin = user && user.admin == 'superadmin' || false
             const isAdmin = isRAdmin || user && user.admin == 'admin' || false // Is User Admin?
             const isBotAdmin = bot && bot.admin || false // Are you Admin?
-            for (let name in global.plugins) {
-                let plugin = global.plugins[name]
+            for (let name in global.features) {
+                let plugin = global.features[name]
                 if (!plugin) continue
                 if (plugin.disabled) continue
                 if (typeof plugin.all === 'function') {
@@ -969,7 +969,7 @@ ${text}
             }
 
             try {
-               require('./lib/print')(m, this)
+               require('./function/print')(m, this)
             } catch (e) {
                 console.log(m, m.quoted, e)
            }

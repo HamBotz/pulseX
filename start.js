@@ -32,13 +32,13 @@ const moment = require("moment-timezone")
 const time = moment.tz('Asia/Jakarta').format("HH:mm:ss")
 const chalk = require('chalk')
 const readline = require('readline')
-const { color } = require('./lib/color')
-let simple = require('./lib/simple')
+const { color } = require('./function/color')
+let simple = require('./function/simple')
 var low
 try {
   low = require('lowdb')
 } catch (e) {
-  low = require('./lib/lowdb')
+  low = require('./function/lowdb')
 }
 const { Low, JSONFile } = low
 
@@ -87,7 +87,7 @@ loadDatabase = async function loadDatabase() {
 }
 loadDatabase()
 
-const authFile = `ham`
+const authFile = `KaguyaSs`
 global.isInit = !fs.existsSync(authFile)
 const { state, saveState, saveCreds } = await useMultiFileAuthState(authFile)
 const { version, isLatest } = await fetchLatestBaileysVersion()
@@ -159,7 +159,7 @@ async function connectionUpdate(update) {
 	if (global.db.data == null) await loadDatabase()
 	// console.log(JSON.stringify(update, null, 4))
 }
-	 if((usePairingCode || useMobile) && fs.existsSync('./ham/creds.json') && !conn.authState.creds.registered) {
+	 if((usePairingCode || useMobile) && fs.existsSync('./Dann/creds.json') && !conn.authState.creds.registered) {
 		console.log(chalk.yellow('-- WARNING: creds.json is broken, please delete it first --'))
 		process.exit(0)
 	}
@@ -219,18 +219,18 @@ reloadHandler = function (restatConn) {
   return true
 }
 
-let pluginFolder = path.join(__dirname, 'plugins')
+let pluginFolder = path.join(__dirname, 'features')
 let pluginFilter = filename => /\.js$/.test(filename)
-plugins = {}
+features = {}
 for (let filename of fs.readdirSync(pluginFolder).filter(pluginFilter)) {
   try {
-    plugins[filename] = require(path.join(pluginFolder, filename))
+    features[filename] = require(path.join(pluginFolder, filename))
   } catch (e) {
     conn.logger.error(e)
-    delete plugins[filename]
+    delete features[filename]
   }
 }
-console.log(Object.keys(plugins))
+console.log(Object.keys(features))
 reload = (_ev, filename) => {
   if (pluginFilter(filename)) {
     let dir = path.join(pluginFolder, filename)
@@ -239,22 +239,22 @@ reload = (_ev, filename) => {
       if (fs.existsSync(dir)) conn.logger.info(`re - require plugin '${filename}'`)
       else {
         conn.logger.warn(`deleted plugin '${filename}'`)
-        return delete plugins[filename]
+        return delete features[filename]
       }
     } else conn.logger.info(`requiring new plugin '${filename}'`)
     let err = syntaxerror(fs.readFileSync(dir), filename)
     if (err) conn.logger.error(`syntax error while loading '${filename}'\n${err}`)
     else try {
-      plugins[filename] = require(dir)
+      features[filename] = require(dir)
     } catch (e) {
       conn.logger.error(`error require plugin '${filename}\n${e}'`)
     } finally {
-      plugins = Object.fromEntries(Object.entries(plugins).sort(([a], [b]) => a.localeCompare(b)))
+      features = Object.fromEntries(Object.entries(features).sort(([a], [b]) => a.localeCompare(b)))
     }
   }
 }
 Object.freeze(reload)
-fs.watch(path.join(__dirname, 'plugins'), reload)
+fs.watch(path.join(__dirname, 'features'), reload)
 reloadHandler()
 
 // Quick Test

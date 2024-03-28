@@ -4,22 +4,22 @@ const fs = require('fs')
 const fetch = require ('node-fetch')
 const { pickRandom } = ('../lib/functions.js')
 
-let handler = async (m, { conn, usedPrefix, command, args }) => {
+let menulist = async (m, { conn, usedPrefix, command, args }) => {
   const perintah = args[0] || 'tags';
   const tagCount = {};
   const tagHelpMapping = {};
   
-  Object.keys(global.plugins)
+  Object.keys(global.features)
     .filter(plugin => !plugin.disabled)
     .forEach(plugin => {
-      const tagsArray = Array.isArray(global.plugins[plugin].tags)
-        ? global.plugins[plugin].tags
+      const tagsArray = Array.isArray(global.features[plugin].tags)
+        ? global.features[plugin].tags
         : [];
 
       if (tagsArray.length > 0) {
-        const helpArray = Array.isArray(global.plugins[plugin].help)
-          ? global.plugins[plugin].help
-          : [global.plugins[plugin].help];
+        const helpArray = Array.isArray(global.features[plugin].help)
+          ? global.features[plugin].help
+          : [global.features[plugin].help];
 
         tagsArray.forEach(tag => {
           if (tag) {
@@ -35,7 +35,7 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
       }
     });
 
-  let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(plugin => {
+  let help = Object.values(global.features).filter(plugin => !plugin.disabled).map(plugin => {
     return {
       help: Array.isArray(plugin.tags) ? plugin.help : [plugin.help],
       tags: Array.isArray(plugin.tags) ? plugin.tags : [plugin.tags],
@@ -430,10 +430,11 @@ let { key } = await conn.sendMessage(m.chat, {
   }
 }
 
-handler.help = ['menu']
-handler.tags = ['main']
-handler.command = ['menu']
-module.exports = handler
+menulist.help = ['menu']
+menulist.tags = ['main']
+menulist.command = ['menu']
+menulist.register = true
+module.exports = menulist
 
 function clockString(ms) {
   let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
