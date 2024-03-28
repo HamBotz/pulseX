@@ -4,7 +4,7 @@ const fs = require('fs')
 const fetch = require ('node-fetch')
 const { pickRandom } = ('../lib/functions.js')
 
-let menulist = async (m, { conn, usedPrefix, command, args }) => {
+let handler = async (m, { conn, usedPrefix, command, args }) => {
   const perintah = args[0] || 'tags';
   const tagCount = {};
   const tagHelpMapping = {};
@@ -430,11 +430,10 @@ let { key } = await conn.sendMessage(m.chat, {
   }
 }
 
-menulist.help = ['menu']
-menulist.tags = ['main']
-menulist.command = ['menu']
-menulist.register = true
-module.exports = menulist
+handler.help = ['menu']
+handler.tags = ['main']
+handler.command = ['menu']
+module.exports = handler
 
 function clockString(ms) {
   let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
