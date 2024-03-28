@@ -219,18 +219,18 @@ reloadHandler = function (restatConn) {
   return true
 }
 
-let pluginFolder = path.join(__dirname, 'features')
+let pluginFolder = path.join(__dirname, 'plugins')
 let pluginFilter = filename => /\.js$/.test(filename)
-features = {}
+plugins = {}
 for (let filename of fs.readdirSync(pluginFolder).filter(pluginFilter)) {
   try {
-    features[filename] = require(path.join(pluginFolder, filename))
+    plugins[filename] = require(path.join(pluginFolder, filename))
   } catch (e) {
     conn.logger.error(e)
-    delete features[filename]
+    delete plugins[filename]
   }
 }
-console.log(Object.keys(features))
+console.log(Object.keys(plugins))
 reload = (_ev, filename) => {
   if (pluginFilter(filename)) {
     let dir = path.join(pluginFolder, filename)
@@ -239,22 +239,22 @@ reload = (_ev, filename) => {
       if (fs.existsSync(dir)) conn.logger.info(`re - require plugin '${filename}'`)
       else {
         conn.logger.warn(`deleted plugin '${filename}'`)
-        return delete features[filename]
+        return delete plugins[filename]
       }
     } else conn.logger.info(`requiring new plugin '${filename}'`)
     let err = syntaxerror(fs.readFileSync(dir), filename)
     if (err) conn.logger.error(`syntax error while loading '${filename}'\n${err}`)
     else try {
-      features[filename] = require(dir)
+      plugins[filename] = require(dir)
     } catch (e) {
       conn.logger.error(`error require plugin '${filename}\n${e}'`)
     } finally {
-      features = Object.fromEntries(Object.entries(features).sort(([a], [b]) => a.localeCompare(b)))
+      plugins = Object.fromEntries(Object.entries(plugins).sort(([a], [b]) => a.localeCompare(b)))
     }
   }
 }
 Object.freeze(reload)
-fs.watch(path.join(__dirname, 'features'), reload)
+fs.watch(path.join(__dirname, 'plugins'), reload)
 reloadHandler()
 
 // Quick Test

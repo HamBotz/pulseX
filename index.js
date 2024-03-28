@@ -83,7 +83,7 @@ function start(file) {
     start("start.js");
   });
 
-  const pluginsFolder = path.join(__dirname, "features");
+  const pluginsFolder = path.join(__dirname, "plugins");
 
   fs.readdir(pluginsFolder, (err, files) => {
     if (err) {

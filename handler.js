@@ -705,8 +705,8 @@ module.exports = {
                 }, time)
             }
 
-            // for (let name in global.features) {
-            //     let plugin = global.features[name]
+            // for (let name in global.plugins) {
+            //     let plugin = global.plugins[name]
             //     if (!plugin) continue
             //     if (plugin.disabled) continue
             //     if (!plugin.all) continue
@@ -733,8 +733,8 @@ module.exports = {
             const isRAdmin = user && user.admin == 'superadmin' || false
             const isAdmin = isRAdmin || user && user.admin == 'admin' || false // Is User Admin?
             const isBotAdmin = bot && bot.admin || false // Are you Admin?
-            for (let name in global.features) {
-                let plugin = global.features[name]
+            for (let name in global.plugins) {
+                let plugin = global.plugins[name]
                 if (!plugin) continue
                 if (plugin.disabled) continue
                 if (typeof plugin.all === 'function') {

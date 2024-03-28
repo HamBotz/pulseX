@@ -9,17 +9,17 @@ let menulist = async (m, { conn, usedPrefix, command, args }) => {
   const tagCount = {};
   const tagHelpMapping = {};
   
-  Object.keys(global.features)
+  Object.keys(global.plugins)
     .filter(plugin => !plugin.disabled)
     .forEach(plugin => {
-      const tagsArray = Array.isArray(global.features[plugin].tags)
-        ? global.features[plugin].tags
+      const tagsArray = Array.isArray(global.plugins[plugin].tags)
+        ? global.plugins[plugin].tags
         : [];
 
       if (tagsArray.length > 0) {
-        const helpArray = Array.isArray(global.features[plugin].help)
-          ? global.features[plugin].help
-          : [global.features[plugin].help];
+        const helpArray = Array.isArray(global.plugins[plugin].help)
+          ? global.plugins[plugin].help
+          : [global.plugins[plugin].help];
 
         tagsArray.forEach(tag => {
           if (tag) {
@@ -35,7 +35,7 @@ let menulist = async (m, { conn, usedPrefix, command, args }) => {
       }
     });
 
-  let help = Object.values(global.features).filter(plugin => !plugin.disabled).map(plugin => {
+  let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(plugin => {
     return {
       help: Array.isArray(plugin.tags) ? plugin.help : [plugin.help],
       tags: Array.isArray(plugin.tags) ? plugin.tags : [plugin.tags],
