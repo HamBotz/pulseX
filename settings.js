@@ -8,12 +8,12 @@
 
 //Kalo kurang tambahin array nya ["Nomor lu"]
 global.owner = [
-  ["6283196081684"],
+  ["6287729860010"],
 ]; 
 
-global.numberbot = "6283196081684";
-global.nameowner = "👤 LT SYAII",
-global.nomorown = "6283196081684";
+global.numberbot = "6281545035037";
+global.nameowner = "ham",
+global.nomorown = "6287729860010";
 
 /*Ini Isi dengan Payment kalian masing masing*/
 global.dana = "6283842839555";
@@ -26,11 +26,11 @@ global.APIs = {}
 global.APIKeys = {}
 
 //Other Settings
-global.namebot = "🔴 SHIMOMIYA KAGUYA";
+global.namebot = "PulseX";
 global.sgc = "https://chat.whatsapp.com/Dax0g7ifCOxKgGTbFTu4Gg";
 global.isPairing = true //Mau pake pairing? true = idup, false = mati
 global.sig = "https://chat.whatsapp.com/Dax0g7ifCOxKgGTbFTu4Gg";
-global.swa = "wa.me/6283196081684";
+global.swa = "wa.me/6287729860010";
 global.version = "4.0";
 global.access_denied = 'https://telegra.ph/file/876dd6d028ea70a67da68.jpg'
 global.wm = "shinomiya Tech Bot WhatsApp"
@@ -116,12 +116,12 @@ externalAdReply: {
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                 newsletterJid: '120363252742621904@newsletter',
-               newsletterName: "🔴 FOLLOW ME ON CHANNEL",
+               newsletterName: "FOLLOW ME ON IG",
                 serverMessageId: -1
             },
             forwardingScore: 256,
 externalAdReply: {
-        title: `✓ Kaguya sama ver 4.0 - LT SYAII`,
+        title: `MultiDevice`,
         body: wm,
         thumbnailUrl: thumb,
         sourceUrl: "",
@@ -139,12 +139,12 @@ externalAdReply: {
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                 newsletterJid: '120363252742621904@newsletter',
-               newsletterName: "🔴 FOLLOW ME ON CHANNEL",
+               newsletterName: "FOLLOW ME ON IG",
                 serverMessageId: -1         
             },
             forwardingScore: 256,
 externalAdReply: {
-        title: `🔴 Kaguya sama -- Simple WhatsApp bot\n• Version: ${global.version}`,
+        title: `Anonymous chat`,
         body: wm,
         thumbnailUrl: icon,
         sourceUrl: "",

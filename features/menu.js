@@ -433,7 +433,6 @@ let { key } = await conn.sendMessage(m.chat, {
 menulist.help = ['menu']
 menulist.tags = ['main']
 menulist.command = ['menu']
-menulist.register = true
 module.exports = menulist
 
 function clockString(ms) {

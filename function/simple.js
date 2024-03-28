@@ -1217,29 +1217,7 @@ externalAdReply: {
      * @param {String|false} chatId
      * @param {Object} options
      */
-     m.reply = async (text, chatId, options) => {
-    conn.reply(chatId ? chatId : m.chat, text, m, options ? options : {
-        contextInfo: {
-            mentionedJid: conn.parseMention(text),
-            groupMentions: [],
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363252742621904@newsletter',
-               newsletterName: "🔴 FOLLOW ME ON CHANNEL",
-                serverMessageId: -1         
-            },
-            forwardingScore: 256,
-externalAdReply: {
-        title: `🔴 Kaguya sama -- Simple WhatsApp bot\n• Version: ${global.version}`,
-        body: wm,
-        thumbnailUrl: icon,
-        sourceUrl: "",
-        mediaType: 1,
-        renderLargerThumbnail: false
-          }
-        }
-    })
-    }
+    m.reply = (text, chatId, options) => conn.reply(chatId ? chatId : m.chat, text, m, options)
     /**
      * Exact Forward this message
      * @param {String} jid
